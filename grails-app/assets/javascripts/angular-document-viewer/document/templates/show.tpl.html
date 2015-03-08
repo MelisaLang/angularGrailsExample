@@ -1,0 +1,16 @@
+<div crud-breadcrumbs="show"></div>
+<h2>Show Document</h2>
+<div flash-message ></div>
+
+<table class="table table-bordered table-striped">
+    <tr display-field label="Author" value="ctrl.document.author"></tr>
+    <tr display-field label="Pub Date" value="ctrl.document.pubDate | date: 'MMM d, yyyy'"></tr>
+    <tr display-field label="Doc Description" value="ctrl.document.docDescription"></tr>
+    <tr display-field label="Date Created" value="ctrl.document.dateCreated | date: 'MMM d, yyyy'"></tr>
+    <tr display-field label="Last Updated" value="ctrl.document.lastUpdated | date: 'MMM d, yyyy'"></tr>
+</table>
+
+<div class="form-actions">
+    <button crud-button="edit" item="ctrl.document"></button>
+    <button crud-button="delete" item="ctrl.document" ></button>
+</div>

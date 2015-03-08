@@ -1,0 +1,36 @@
+<div crud-breadcrumbs="{{ctrl.document.id ? 'edit' : 'create'}}"></div>
+<h2>
+    <span ng-hide="ctrl.document.id">Create Document</span>
+    <span ng-show="ctrl.document.id">Edit Document</span>
+</h2>
+
+<div flash-message ></div>
+
+<form name="form" class="form-horizontal" role="form" novalidate> 
+	
+	<div field-container label="Author" invalid="form.author.$invalid">
+		<input name="author" type="text" class='form-control' ng-model="ctrl.document.author" required  />
+	</div>
+	
+	<div field-container label="Pub Date" invalid="form.pubDate.$invalid">
+		<input name="pubDate" type="text" class='form-control' date-field ng-model="ctrl.document.pubDate" required  />
+	</div>
+	
+	<div field-container label="Doc Description" invalid="form.docDescription.$invalid">
+		<input name="docDescription" type="text" class='form-control' ng-model="ctrl.document.docDescription" required  />
+	</div>
+	
+	<div field-container label="Date Created" invalid="form.dateCreated.$invalid">
+		<input name="dateCreated" type="text" class='form-control' date-field ng-model="ctrl.document.dateCreated" required  />
+	</div>
+	
+	<div field-container label="Last Updated" invalid="form.lastUpdated.$invalid">
+		<input name="lastUpdated" type="text" class='form-control' date-field ng-model="ctrl.document.lastUpdated" required  />
+	</div>
+
+    <div>
+        <button crud-button="save" item="ctrl.document" is-disabled="form.$invalid"></button>
+        <span ng-if="ctrl.document.id"><button crud-button="delete" item="ctrl.document"></button></span>
+    </div>
+
+</form>

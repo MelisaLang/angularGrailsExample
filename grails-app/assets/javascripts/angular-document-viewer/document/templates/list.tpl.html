@@ -1,0 +1,62 @@
+<div crud-breadcrumbs="list"></div>
+
+<div class="clearfix">
+	<h2 class="pull-left">Document List</h2>
+	<div class="pull-right"><button crud-button="create" ></button></div>
+</div>
+<div flash-message ></div>
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title"><i class="fa fa-filter"></i> Filter List</h3>
+  </div>
+  <div class="panel-body">
+<div class="row">
+<form class="form">
+	<div class="form-group col-md-3">
+		<label for="filter.author">Author</label>
+		<input type="text" class='form-control' ng-model="ctrl.filter.author" ng-model-options="{ debounce: 300 }"  />
+    </div>
+	<div class="form-group col-md-3">
+		<label for="filter.pubDate">Pub Date</label>
+		<input type="text" class='form-control' date-field ng-model="ctrl.filter.pubDate" ng-model-options="{ debounce: 300 }"  />
+    </div>
+	<div class="form-group col-md-3">
+		<label for="filter.docDescription">Doc Description</label>
+		<input type="text" class='form-control' ng-model="ctrl.filter.docDescription" ng-model-options="{ debounce: 300 }"  />
+    </div>
+	<div class="form-group col-md-3">
+		<label for="filter.dateCreated">Date Created</label>
+		<input type="text" class='form-control' date-field ng-model="ctrl.filter.dateCreated" ng-model-options="{ debounce: 300 }"  />
+    </div>
+</form>
+</div>
+  </div>
+</div>
+
+<table id="list" class="table table-striped table-bordered table-hover">
+
+    <thead sort-header ng-model="ctrl.sort" on-sort="ctrl.reload()">
+        <th sortable-column title="Id" property="id"></th>
+		<th sortable-column title="Author" property="author"></th>
+		<th sortable-column title="Pub Date" property="pubDate"></th>
+		<th sortable-column title="Doc Description" property="docDescription"></th>
+		<th sortable-column title="Date Created" property="dateCreated"></th>
+        <th>&nbsp;</th>
+    </thead>
+    <tbody>
+        <tr class="animate-repeat" ng-repeat="item in ctrl.documentList">
+            <td><a href="#/show/{{item.id}}">{{item.id}}</a></td>
+			<td>{{ item.author }}</td>
+			<td>{{ item.pubDate | date: 'MMM d, yyyy' }}</td>
+			<td>{{ item.docDescription }}</td>
+			<td>{{ item.dateCreated | date: 'MMM d, yyyy' }}</td>
+            <td>
+                <button crud-button="edit" item="item" ></button>
+                <button crud-button="delete" item="item" after-action="ctrl.reload()"></button>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<div pagination total-items="ctrl.documentList.getTotalCount()" items-per-page="ctrl.pageSize" ng-model="ctrl.page" ng-change="ctrl.load()"></div>
